@@ -100,7 +100,7 @@ DATABASE_ROUTERS = (
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 MIDDLEWARE = (
-    'tenant_tutorial.middleware.TenantTutorialMiddleware',
+    'django_tenants.middleware.same_domain.SameDomainMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
