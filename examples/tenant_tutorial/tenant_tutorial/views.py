@@ -30,3 +30,4 @@ class HomeView(TemplateView):
 
         context['tenants_list'] = Client.objects.all()
         return context
+

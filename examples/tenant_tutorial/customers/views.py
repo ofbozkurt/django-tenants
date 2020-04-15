@@ -1,13 +1,15 @@
 from django.contrib.auth.models import User
 from django.db.utils import DatabaseError
 from django.views.generic import FormView, TemplateView, CreateView
+from django_tenants.urlresolvers import reverse_lazy
+from django.urls import reverse
+from django.views.generic import RedirectView
+import logging
+
+from tenant_only.models import UploadFile
 from customers.forms import GenerateUsersForm
 from customers.models import Client
 from random import choice
-from tenant_only.models import UploadFile
-
-from django_tenants.urlresolvers import reverse_lazy
-
 
 class TenantView(TemplateView):
     template_name = "index_tenant.html"
@@ -68,3 +70,11 @@ class TenantViewFileUploadCreate(CreateView):
         context['upload_files'] = UploadFile.objects.all()
         return context
 
+
+class TenantViewActionLog(RedirectView):
+    permanent = False
+    query_string = True
+
+    def get_redirect_url(self, *args, **kwargs):
+        logging.error("Test!!")
+        return reverse('index')
