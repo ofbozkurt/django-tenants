@@ -2,6 +2,7 @@
 import sys
 import os
 
+
 DEBUG = True
 
 ADMINS = (
@@ -24,6 +25,7 @@ DATABASES = {
         'USER': os.environ.get('DATABASE_USER', 'tenant_tutorial'),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'qwerty'),
         'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
+        'PORT': os.environ.get('DATABASE_PORT', '5432'),
     }
 }
 
@@ -171,7 +173,8 @@ TENANT_DOMAIN_MODEL = "customers.Domain"  # app.Model
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-INSTALLED_APPS = list(set(TENANT_APPS + SHARED_APPS))
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 

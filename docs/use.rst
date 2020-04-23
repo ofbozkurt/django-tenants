@@ -220,6 +220,19 @@ If you don't specify a schema, you will be prompted to enter one. Otherwise, you
 
     ./manage.py tenant_command loaddata --schema=customer1
 
+
+
+all_tenants_command
+~~~~~~~~~~~~~~~~~~~
+
+To run any command on an every schema, you can use the special ``all_tenants_command``, which creates a wrapper around your command so that it run on every schema. For example
+
+.. code-block:: bash
+
+    ./manage.py all_tenants_command loaddata
+
+
+
 create_tenant_superuser
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -255,6 +268,26 @@ The command ``delete_tenant`` deletes a schema
     ./manage.py delete_tenant
 
 Warning this command will delete a tenant and PostgreSQL schema regardless if ``auto_drop_schema`` is set to False.
+
+
+clone_tenant
+~~~~~~~~~~~~~
+
+The command ``clone_tenant`` clones a schema.
+
+.. code-block:: bash
+
+    ./manage.py clone_tenant
+
+
+There are some options to that can be set. You can view all the options by running
+
+.. code-block:: bash
+
+    ./manage.py clone_tenant -h
+
+Credits to `pg-clone-schema <https://github.com/denishpatel/pg-clone-schema>`_.
+
 
 PostGIS
 -------
